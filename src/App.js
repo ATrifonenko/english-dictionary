@@ -1,3 +1,4 @@
+import { Select, Option } from './components/CustomSelect/CustomSelect';
 import './App.css';
 
 function App() {
@@ -15,24 +16,26 @@ function App() {
         <div className="menu">
           <div className="menu__filter">
             <div className="menu__select-container">
-              <select>
-                <option value="1">Значение 1</option>
-                <option value="2">Значение 2</option>
-                <option value="3">Значение 3</option>
-                <option value="4">Значение 4</option>
-                <option value="5">Значение 5</option>
-              </select>
+              <Select>
+                <Option value="1">Значение 1</Option>
+                <Option value="2">Значение 2</Option>
+                <Option value="3" selected>
+                  Значение 3
+                </Option>
+                <Option value="4">Значение 4</Option>
+                <Option value="5">Значение 5</Option>
+              </Select>
             </div>
           </div>
           <div className="menu__control">
             <div className="menu__select-container">
-              <select>
-                <option value="1">Добавить в 1</option>
-                <option value="2">Добавить в 2</option>
-                <option value="3">Добавить в 3</option>
-                <option value="4">Добавить в 4</option>
-                <option value="5">Добавить в 5</option>
-              </select>
+              <Select>
+                <Option value="1">Добавить в 1</Option>
+                <Option value="2">Добавить в 2</Option>
+                <Option value="3">Добавить в 3</Option>
+                <Option value="4">Добавить в 4</Option>
+                <Option value="5">Добавить в 5</Option>
+              </Select>
             </div>
             <div className="menu__remove">
               <div className="word-remove">DEL</div>
