@@ -1,7 +1,16 @@
 import { Select, Option } from './components/CustomSelect/CustomSelect';
+import Wordlist from './components/Wordlist/Wordlist';
+import { ReactComponent as DeleteSVG } from './assets/delete.svg';
 import './App.css';
 
 function App() {
+  const words = [
+    { id: 1, en: 'English', translate: 'Английский' },
+    { id: 2, en: 'English', translate: 'Английский' },
+    { id: 3, en: 'English', translate: 'Английский' },
+    { id: 4, en: 'English', translate: 'Английский' },
+  ];
+
   return (
     <div className="App">
       <header className="header">
@@ -38,67 +47,15 @@ function App() {
               </Select>
             </div>
             <div className="menu__remove">
-              <div className="word-remove">DEL</div>
+              <div className="icon">
+                <span className="icon__delete">
+                  <DeleteSVG />
+                </span>
+              </div>
             </div>
           </div>
         </div>
-        <div className="words-list">
-          <div className="words-list_row">
-            <div className="words-list__checkbox">
-              <input className="words-list__checkbox-input" type="checkbox" />
-            </div>
-            <div className="words-list__word">
-              <strong className="words-list__en-word">English</strong>
-              <span className="words-list__sign">—</span>
-              <span className="words-list__translate">Английский</span>
-            </div>
-            <div className="words-list__word-remove">DEL</div>
-          </div>
-          <div className="words-list_row">
-            <div className="words-list__checkbox">
-              <input className="words-list__checkbox-input" type="checkbox" />
-            </div>
-            <div className="words-list__word">
-              <strong className="words-list__en-word">English</strong>
-              <span className="words-list__sign">—</span>
-              <span className="words-list__translate">Английский</span>
-            </div>
-            <div className="words-list__word-remove">DEL</div>
-          </div>
-          <div className="words-list_row">
-            <div className="words-list__checkbox">
-              <input className="words-list__checkbox-input" type="checkbox" />
-            </div>
-            <div className="words-list__word">
-              <strong className="words-list__en-word">English</strong>
-              <span className="words-list__sign">—</span>
-              <span className="words-list__translate">Английский</span>
-            </div>
-            <div className="words-list__word-remove">DEL</div>
-          </div>
-          <div className="words-list_row">
-            <div className="words-list__checkbox">
-              <input className="words-list__checkbox-input" type="checkbox" />
-            </div>
-            <div className="words-list__word">
-              <strong className="words-list__en-word">English</strong>
-              <span className="words-list__sign">—</span>
-              <span className="words-list__translate">Английский</span>
-            </div>
-            <div className="words-list__word-remove">DEL</div>
-          </div>
-          <div className="words-list_row">
-            <div className="words-list__checkbox">
-              <input className="words-list__checkbox-input" type="checkbox" />
-            </div>
-            <div className="words-list__word">
-              <strong className="words-list__en-word">English</strong>
-              <span className="words-list__sign">—</span>
-              <span className="words-list__translate">Английский</span>
-            </div>
-            <div className="words-list__word-remove">DEL</div>
-          </div>
-        </div>
+        <Wordlist words={words} />
       </div>
     </div>
   );

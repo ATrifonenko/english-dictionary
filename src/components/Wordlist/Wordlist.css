@@ -1,0 +1,25 @@
+.wordslist_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 16px;
+  border-bottom: 1px solid #e6e9ee;
+}
+
+.wordslist__checkbox {
+  margin-right: 15px;
+}
+
+.wordslist__word {
+  flex-grow: 2;
+  margin-right: 15px;
+  padding: 8px;
+}
+
+.wordslist__word:hover {
+  background-color: #f0f8ff;
+  border-radius: 4px;
+  cursor: pointer;
+}
