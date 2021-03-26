@@ -32,6 +32,12 @@
   border-radius: 4px;
 }
 
+.button {
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 4px;
+}
+
 .search__btn {
   padding: 6px 33px;
   font-size: 16px;
@@ -61,7 +67,7 @@
   width: 32px;
   height: 32px;
   border-radius: 4px;
-  transition: background-color .2s ease;
+  transition: background-color 0.2s ease;
   cursor: pointer;
 }
 
@@ -91,7 +97,7 @@
   height: 16px;
   background: #fff;
   border-radius: 4px;
-  border: 2px solid rgba(55,56,60,.15);
+  border: 2px solid rgba(55, 56, 60, 0.15);
   transition: all 225ms ease;
 }
 
@@ -116,12 +122,12 @@
   cursor: pointer;
 }
 
-.checkbox__input:checked+.checkbox__box {
+.checkbox__input:checked + .checkbox__box {
   border: 2px solid #2582e7;
   border-width: 8px;
 }
 
-.checkbox__input:checked+.checkbox__box+.checkbox__icon {
+.checkbox__input:checked + .checkbox__box + .checkbox__icon {
   opacity: 1;
   width: 10px;
   height: 10px;
