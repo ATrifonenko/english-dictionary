@@ -34,3 +34,10 @@
   color: #fff;
   border: 1px solid #dadada;
 }
+
+.auth-form__error-description {
+  margin-top: -10px;
+  margin-bottom: 15px;
+  color: #ed593b;
+  font-size: 14px;
+}
