@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 import './Auth.css';
 
 function Auth(props) {
@@ -36,7 +38,7 @@ function Auth(props) {
 
   return (
     <div className="auth-box">
-      <h2 className="auth-box__title">{props.title}</h2>
+      <h2 className="auth-box__title">{props.type === 'signin' ? 'Вход' : 'Регистрация'}</h2>
       <form className="auth-form">
         <label className="auth-form__lable" htmlFor="email">
           Эл. почта:
@@ -63,23 +65,34 @@ function Auth(props) {
         />
         {errors.password ? <p className="auth-form__error-description">{errors.password}</p> : ''}
         <button className="auth-form__btn-submit button" type="submit" onClick={submit}>
-          {props.title}
+          {props.type === 'signin' ? 'Войти' : 'Зарегистироваться'}
         </button>
       </form>
+      {props.type === 'signin' ? (
+        <span className="auth-box__question">
+          {'Еще нет аккаунта? '}
+          <Link className="auth-box__question-link" to="/signup">
+            Зарегистрироваться
+          </Link>
+        </span>
+      ) : (
+        <span className="auth-box__question">
+          {'Уже есть аккаунт? '}
+          <Link className="auth-box__question-link" to="/signin">
+            Войти
+          </Link>
+        </span>
+      )}
     </div>
   );
 }
 
 export function SignIn() {
-  const signIn = (login, password) => {
-    console.log(login, password);
-  };
-  return <Auth title="Вход" submit={signIn} />;
+  const auth = useAuth();
+  return <Auth type="signin" submit={auth.signIn} />;
 }
 
 export function SignUp() {
-  const signUp = (login, password) => {
-    console.log(login, password);
-  };
-  return <Auth title="Регистрация" submit={signUp} />;
+  const auth = useAuth();
+  return <Auth type="signup" submit={auth.signUp} />;
 }

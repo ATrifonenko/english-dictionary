@@ -41,3 +41,14 @@
   color: #ed593b;
   font-size: 14px;
 }
+
+.auth-box__question {
+  margin-top: 10px;
+  align-self: center;
+  font-size: 14px;
+}
+
+.auth-box__question-link {
+  text-decoration: none;
+  color: #2582e7;
+}
