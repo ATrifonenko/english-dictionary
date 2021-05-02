@@ -33,7 +33,6 @@ function App() {
                 <input type="text" className="search__input" placeholder="Найти слово" />
                 <button className="search__btn">Найти</button>
               </div>
-
               <div className="container">
                 <div className="menu">
                   <div className="menu__filter">
@@ -79,13 +78,19 @@ function App() {
 }
 
 function PrivateRoute({ children, ...rest }) {
-  let auth = useAuth();
+  const { user, isAuthenticating } = useAuth();
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user ? children : <Redirect to={{ pathname: '/signin', state: { from: location } }} />
+        isAuthenticating ? (
+          <div>loading</div>
+        ) : user ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: '/signin', state: { from: location } }} />
+        )
       }
     />
   );

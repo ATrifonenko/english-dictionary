@@ -1,9 +1,11 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
 const authContext = createContext();
 
 export function ProvideAuth({ children }) {
-  const auth = useProvideAuth();
+  let auth = useProvideAuth();
+
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
@@ -12,18 +14,38 @@ export const useAuth = () => {
 };
 
 function useProvideAuth() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(null);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
 
-  const signIn = (login, password) => {
-    console.log(login, password);
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setIsAuthenticating(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const signIn = (email, password, cb) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      setUser(userCredential.user);
+      cb();
+    });
   };
 
-  const signUp = (login, password) => {
-    console.log(login, password);
+  const signUp = (email, password, cb) => {
+    const auth = getAuth();
+    return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      setUser(userCredential.user);
+      cb();
+    });
   };
 
   return {
     user,
+    isAuthenticating,
     signIn,
     signUp,
   };

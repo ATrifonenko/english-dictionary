@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import './Auth.css';
 
@@ -7,13 +7,20 @@ function Auth(props) {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
+  let history = useHistory();
+  let location = useLocation();
+
+  const redirectAfterLogin = () => {
+    let { from } = location.state || { from: { pathname: '/' } };
+    history.replace(from);
+  };
 
   const submit = (e) => {
     e.preventDefault();
     const validationErrors = validate(login, password);
     if (Object.entries(validationErrors).length === 0) {
       setErrors({});
-      props.submit(login, password);
+      props.submit(login, password, redirectAfterLogin);
     } else {
       setErrors(validationErrors);
     }
@@ -88,11 +95,11 @@ function Auth(props) {
 }
 
 export function SignIn() {
-  const auth = useAuth();
+  let auth = useAuth();
   return <Auth type="signin" submit={auth.signIn} />;
 }
 
 export function SignUp() {
-  const auth = useAuth();
+  let auth = useAuth();
   return <Auth type="signup" submit={auth.signUp} />;
 }
