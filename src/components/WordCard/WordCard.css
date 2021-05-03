@@ -1,0 +1,97 @@
+.wordcard {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin: 0 auto;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12);
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.wordcard__add-word {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2582e7;
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  margin-top: 10px;
+}
+
+.wordcard__word-meaning {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.definitions-list__definition {
+  padding: 10px 0 10px 20px;
+}
+
+.part-of-speach {
+  color: #892aff;
+  font-style: italic;
+  border-bottom: 1px solid #e6e9ee;
+}
+
+.definition {
+  display: flex;
+}
+
+.definition span {
+  font-weight: 700;
+  padding-right: 5px;
+}
+
+.example {
+  display: flex;
+  padding-top: 10px;
+  padding-left: 15px;
+  font-style: italic;
+}
+
+.example span {
+  font-weight: 500;
+  padding-right: 5px;
+}
+
+.synonyms {
+  display: flex;
+  padding-top: 10px;
+  padding-left: 15px;
+  font-style: italic;
+}
+
+.synonyms span {
+  font-weight: 500;
+  padding-right: 5px;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before,
+.close:after {
+  position: absolute;
+  left: 11px;
+  content: ' ';
+  height: 24px;
+  width: 3px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}

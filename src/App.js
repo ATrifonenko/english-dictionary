@@ -1,6 +1,7 @@
 import { Select, Option } from './components/CustomSelect/CustomSelect';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Wordlist from './components/Wordlist/Wordlist';
+import WordCard from './components/WordCard/WordCard';
 import { SignUp, SignIn } from './components/Auth/Auth';
 import { useAuth, ProvideAuth } from './hooks/useAuth';
 import { ReactComponent as DeleteSVG } from './assets/delete.svg';
@@ -34,6 +35,7 @@ function App() {
                 <button className="search__btn">Найти</button>
               </div>
               <div className="container">
+                <WordCard />
                 <div className="menu">
                   <div className="menu__filter">
                     <div className="menu__select-container">
