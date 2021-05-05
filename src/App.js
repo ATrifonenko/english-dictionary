@@ -1,13 +1,17 @@
+import { useState } from 'react';
 import { Select, Option } from './components/CustomSelect/CustomSelect';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Wordlist from './components/Wordlist/Wordlist';
 import WordCard from './components/WordCard/WordCard';
+import Search from './components/Search/Search';
 import { SignUp, SignIn } from './components/Auth/Auth';
 import { useAuth, ProvideAuth } from './hooks/useAuth';
 import { ReactComponent as DeleteSVG } from './assets/delete.svg';
 import './App.css';
 
 function App() {
+  const [definitionWord, setDefinitionWord] = useState(null);
+
   const words = [
     { id: 1, en: 'English', translate: 'Английский' },
     { id: 2, en: 'English', translate: 'Английский' },
@@ -30,12 +34,9 @@ function App() {
               <SignIn />
             </Route>
             <PrivateRoute path="/">
-              <div className="search">
-                <input type="text" className="search__input" placeholder="Найти слово" />
-                <button className="search__btn">Найти</button>
-              </div>
+              <Search setDefinitionToState={(definition) => setDefinitionWord(definition)} />
               <div className="container">
-                <WordCard />
+                {definitionWord ? <WordCard word={definitionWord} /> : null}
                 <div className="menu">
                   <div className="menu__filter">
                     <div className="menu__select-container">
