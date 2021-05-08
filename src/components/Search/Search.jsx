@@ -9,10 +9,9 @@ function Search({ setDefinitionToState }) {
     setInput(e.target.value);
   };
 
-  const handleSearchBtn = async () => {
+  const handleSearchBtn = () => {
     if (input.length > 0) {
-      const definition = await getDefinitionFromDictionaryApi(input);
-      setDefinitionToState(definition);
+      getDefinitionFromDictionaryApi(input).then((definition) => setDefinitionToState(definition));
     }
   };
 

@@ -20,7 +20,7 @@ function Auth(props) {
     const validationErrors = validate(login, password);
     if (Object.entries(validationErrors).length === 0) {
       setErrors({});
-      props.submit(login, password, redirectAfterLogin);
+      props.submit(login, password).then(() => redirectAfterLogin());
     } else {
       setErrors(validationErrors);
     }

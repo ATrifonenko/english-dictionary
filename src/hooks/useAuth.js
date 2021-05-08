@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import db from '../firebase';
 
 const authContext = createContext();
 
@@ -27,19 +29,20 @@ function useProvideAuth() {
     return () => unsubscribe();
   }, []);
 
-  const signIn = (email, password, cb) => {
+  const signIn = (email, password) => {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    return signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
       setUser(userCredential.user);
-      cb();
     });
   };
 
-  const signUp = (email, password, cb) => {
+  const signUp = (email, password) => {
     const auth = getAuth();
     return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
       setUser(userCredential.user);
-      cb();
+      setDoc(doc(db, 'users', userCredential.user.uid), {
+        email: userCredential.user.email,
+      });
     });
   };
 
