@@ -1,8 +1,19 @@
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import { updateWordList } from '../../api';
 import { ReactComponent as DeleteSVG } from '../../assets/delete.svg';
 import './Wordlist.css';
 
-function Wordlist(props) {
-  const rows = props.words.map((word) => (
+function Wordlist() {
+  const [words, setWords] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const unsubscribe = updateWordList(user.uid, (words) => setWords(words));
+    return () => unsubscribe();
+  }, [user]);
+
+  const rows = words.map((word) => (
     <div className="wordslist_row" key={word.id}>
       <div className="checkbox wordslist__checkbox">
         <label htmlFor={word.id} className="checkbox__label">
@@ -13,9 +24,9 @@ function Wordlist(props) {
       </div>
 
       <div className="wordslist__word">
-        <strong className="wordslist__en-word">{word.en}</strong>
-        <span className="wordslist__sign"> — </span>
-        <span className="wordslist__translate">{word.translate}</span>
+        <strong className="wordslist__en-word">{word.en.word}</strong>
+        {/* <span className="wordslist__sign"> — </span>
+        <span className="wordslist__translate">{word.ru?.word || ''}</span> */}
       </div>
       <div className="wordslist__word-remove">
         <div className="icon">

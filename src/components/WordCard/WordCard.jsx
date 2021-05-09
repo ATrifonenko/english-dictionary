@@ -1,7 +1,12 @@
+import { saveWord } from '../../api';
 import './WordCard.css';
 
 function WordCard(props) {
   const [word] = props.word;
+
+  const addWordToDictionary = () => {
+    saveWord(word);
+  };
 
   const meanings = word.meanings.map((meaning, index) => {
     const definitions = meaning.definitions.map((definition, index) => (
@@ -38,7 +43,9 @@ function WordCard(props) {
       <div className="close"></div>
       <div className="wordcard__header">
         <h2 className="wordcard__word">{word.word}</h2>
-        <button className="wordcard__add-word">Добавить в словарь</button>
+        <button className="wordcard__add-word" onClick={addWordToDictionary}>
+          Добавить в словарь
+        </button>
       </div>
       {meanings}
     </div>
