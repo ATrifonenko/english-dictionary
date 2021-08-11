@@ -9,7 +9,7 @@ function Search({ setDefinitionToState }) {
     setInput(e.target.value);
   };
 
-  const handleSearchBtn = () => {
+  const handleSearch = () => {
     if (input.length > 0) {
       getDefinitionFromDictionaryApi(input).then((definition) => setDefinitionToState(definition));
     }
@@ -17,8 +17,14 @@ function Search({ setDefinitionToState }) {
 
   return (
     <div className="search">
-      <input type="text" className="search__input" placeholder="Найти слово" onChange={handleChangeInput} />
-      <button className="search__btn" onClick={handleSearchBtn}>
+      <input
+        type="text"
+        className="search__input"
+        placeholder="Найти слово"
+        onChange={handleChangeInput}
+        onKeyUp={(e) => e.key === 'Enter' && handleSearch()}
+      />
+      <button className="search__btn" onClick={handleSearch}>
         Найти
       </button>
     </div>

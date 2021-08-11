@@ -36,7 +36,7 @@ function App() {
             <PrivateRoute path="/">
               <Search setDefinitionToState={(definition) => setDefinitionWord(definition)} />
               <div className="container">
-                {definitionWord ? <WordCard word={definitionWord} /> : null}
+                {definitionWord ? <WordCard word={definitionWord} close={() => setDefinitionWord(null)} /> : null}
                 <div className="menu">
                   <div className="menu__filter">
                     <div className="menu__select-container">

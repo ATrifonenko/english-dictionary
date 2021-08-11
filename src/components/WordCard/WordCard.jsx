@@ -8,6 +8,10 @@ function WordCard(props) {
     saveWord(word);
   };
 
+  const closeWordCard = () => {
+    props.close();
+  };
+
   const meanings = word.meanings.map((meaning, index) => {
     const definitions = meaning.definitions.map((definition, index) => (
       <div className="definitions-list__definition" key={index}>
@@ -40,7 +44,7 @@ function WordCard(props) {
 
   return (
     <div className="wordcard">
-      <div className="close"></div>
+      <div className="close" onClick={closeWordCard}></div>
       <div className="wordcard__header">
         <h2 className="wordcard__word">{word.word}</h2>
         <button className="wordcard__add-word" onClick={addWordToDictionary}>
