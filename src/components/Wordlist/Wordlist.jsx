@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { updateWordList } from '../../api';
 import { ReactComponent as DeleteSVG } from '../../assets/delete.svg';
+import { getWords } from './wordlistSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import './Wordlist.css';
 
 function Wordlist() {
-  const [words, setWords] = useState([]);
+  const words = useSelector((state) => state.wordlist);
+  const dispatch = useDispatch();
   const { user } = useAuth();
 
   useEffect(() => {
-    const unsubscribe = updateWordList(user.uid, (words) => setWords(words));
+    const unsubscribe = updateWordList(user.uid, (words) => dispatch(getWords(words)));
     return () => unsubscribe();
-  }, [user]);
+  }, [user, dispatch]);
 
   const rows = words.map((word) => (
     <div className="wordslist_row" key={word.id}>
