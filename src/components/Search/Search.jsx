@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { getDefinitionFromDictionaryApi } from '../../api';
+import { useSelector } from 'react-redux';
 import './Search.css';
 
 function Search({ setDefinitionToState }) {
+  const words = useSelector((state) => state.wordlist);
   const [input, setInput] = useState('');
 
   const handleChangeInput = (e) => {
@@ -11,7 +13,15 @@ function Search({ setDefinitionToState }) {
 
   const handleSearch = () => {
     if (input.length > 0) {
-      getDefinitionFromDictionaryApi(input).then((definition) => setDefinitionToState(definition));
+      const wordFromState = words.find((el) => el.en.word === input);
+      if (wordFromState) {
+        setDefinitionToState([wordFromState.en]);
+      } else {
+        getDefinitionFromDictionaryApi(input).then((definition) => {
+          console.log(definition);
+          setDefinitionToState(definition);
+        });
+      }
     }
   };
 
